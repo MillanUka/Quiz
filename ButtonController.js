@@ -1,3 +1,8 @@
+/**
+ * This Script control the four buttons representing A, B, C, and D
+ */
+
+//Getting the buttons
 let aButton = document.getElementById("aBUtton");
 let bButton = document.getElementById("bBUtton");
 let cButton = document.getElementById("cBUtton");
@@ -17,8 +22,10 @@ const D = 3;
 const ORANGE_RED = "orangered";
 const GREY = "grey";
 
+//Adding an event listeners to the buttons
+
 aButton.addEventListener('click', function() {
-    console.log("Line Button pressed");
+    //Clearing buttons 
     clearButtonStates();
     aClicked = true;
     aButton.style.backgroundColor = GREY;
@@ -29,7 +36,6 @@ aButton.addEventListener('click', function() {
 })
 
 bButton.addEventListener('click', function() {
-    console.log("Line Button pressed");
     clearButtonStates()
     bClicked = true;
     bButton.style.backgroundColor = GREY;

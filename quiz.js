@@ -4,8 +4,10 @@ let questionDisplay = document.getElementById("questionBox")
 let questionList = [];
 
 function readInQuestions() {
+    //Parsing in the JSON file with the questions
     var readInQuestions = JSON.parse(questions);
 
+    //Loop goes through the enture JSON file and generates all the questions
     for (i = 0; i < readInQuestions.length; ++i) {
         var question = readInQuestions[i].question;
         var answer = readInQuestions[i].answer;
@@ -15,50 +17,48 @@ function readInQuestions() {
 
         questionList.push(currentlyReadInQuestion);
     }
-
-    console.log(questionList)
-    for (i = 0; i < questionList.length; ++i) {
-        questionList[i].printQuestion();
-    }
 }
 
 function nextQuestion() {
+    //CHecking if the user is correct
     checkAnswer();
+    //Checking whether or not to end the quiz
     if (checkEndOfQuiz()) {
+        //Going to the next question
         ++currentQuestionIndex;
-        console.log("Next Question: " + currentQuestionIndex);
         updateUI();
     } else {
-        console.log("end of quiz");
         endQuiz();
     }
 }
 
 function startQuiz() {
+    //Add one as the starting index is -1
     ++currentQuestionIndex;
     updateUI();
 }
 
 function updateUI() {
-    if (questionList[currentQuestionIndex] != null) {
-        questionDisplay.innerHTML = questionList[currentQuestionIndex].getQuestion();
-    }
+    questionDisplay.innerHTML = questionList[currentQuestionIndex].getQuestion();
 }
 
 function checkEndOfQuiz() {
+    //Return whether or not if this is the last question in the quiz
     return (currentQuestionIndex < questionList.length - 1)
 }
 
 function endQuiz() {
-    // document.location.href = "result.html";
-
-    var myNode = document.getElementById("content");
-    while (myNode.firstChild) {
-        myNode.removeChild(myNode.firstChild);
+    //Removing all the content so the results can be displayed
+    var contentNode = document.getElementById("content");
+    while (contentNode.firstChild) {
+        contentNode.removeChild(contentNode.firstChild);
     }
 
-    document.getElementById("title").innerHTML = "<h3>RESULTS</h3>"
-    document.getElementById("content").innerHTML = '<div class = "result">Your score was ' + score + ' </div>' +
+    //Adding a title saying RESULTS rather than QUIZ
+    document.getElementById("title").innerHTML = "<h3>RESULTS</h3>";
+
+    //Replacing the quiz content with the score and a button that links back to the main menu
+    document.getElementById("content").innerHTML = '<div class = "result">Your score was <b>' + score + '</b> </div>' +
         '<button ><a href = "index.html">Main Menu</a></button>';
 }
 
@@ -66,9 +66,9 @@ function checkAnswer() {
     var currentQuestion = questionList[currentQuestionIndex];
 
     if (currentQuestion.answer == currentQuestion.answersLists[userAnswer]) {
-        console.log("Correct!");
         ++score;
     }
 }
+
 readInQuestions();
 startQuiz();
