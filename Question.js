@@ -4,11 +4,13 @@ class Question {
         this.question = question;
         this.answer = answer;
         this.dummyAnswers = dummyAnswers;
+        this.answersLists = [];
+        this.answersLists.push(this.answer);
+        this.answersLists.push(this.dummyAnswers[0]);
+        this.answersLists.push(this.dummyAnswers[1]);
+        this.answersLists.push(this.dummyAnswers[2]);
 
-        console.log('Inside of constructor');
-        console.log(question)
-        console.log(answer)
-        console.log(dummyAnswers)
+        this.shuffle(this.answersLists)
     }
 
     printQuestion = function() {
@@ -16,13 +18,21 @@ class Question {
     }
 
     getQuestion = function() {
-
-        console.log(this.dummyAnswers);
         var displayedQuestion = this.question + '\n' +
-            '<p>A) ' + this.dummyAnswers[0] +
-            '</p><p>B) ' + this.dummyAnswers[1] +
-            '</p><p>C) ' + this.dummyAnswers[2] + "</p>";
+            '<p>A) ' + this.answersLists[0] +
+            '</p><p>B) ' + this.answersLists[1] +
+            '</p><p>C) ' + this.answersLists[2] +
+            '</p><p>D) ' + this.answersLists[3] + '</p>';
 
         return displayedQuestion;
+    }
+
+    shuffle(arrayToShuffle) {
+
+        for (let i = arrayToShuffle.length - 1; i > 0; i--) {
+            const randomIndex = Math.floor(Math.random() * (i + 1));
+            [arrayToShuffle[i], arrayToShuffle[randomIndex]] = [arrayToShuffle[randomIndex], arrayToShuffle[i]];
+        }
+        return arrayToShuffle;
     }
 }

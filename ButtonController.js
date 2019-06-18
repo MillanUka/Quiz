@@ -8,42 +8,58 @@ let bClicked = false;
 let cClicked = false;
 let dClicked = false;
 
-const ORANGE_RED = "orangered"
-const GREY = "grey"
+let userAnswer;
+const A = 0;
+const B = 1;
+const C = 2;
+const D = 3;
+
+const ORANGE_RED = "orangered";
+const GREY = "grey";
+
 aButton.addEventListener('click', function() {
     console.log("Line Button pressed");
-    clearButtonStates()
+    clearButtonStates();
     aClicked = true;
     aButton.style.backgroundColor = GREY;
 
+    userAnswer = A;
     nextQuestion();
+    clearButtonStates();
 })
 
 bButton.addEventListener('click', function() {
     console.log("Line Button pressed");
     clearButtonStates()
     bClicked = true;
-    bButton.style.backgroundColor = "grey"
+    bButton.style.backgroundColor = GREY;
 
+    userAnswer = B;
     nextQuestion();
+    clearButtonStates();
 })
 
 cButton.addEventListener('click', function() {
     clearButtonStates()
 
     cClicked = true;
-    cButton.style.backgroundColor = "grey"
+    cButton.style.backgroundColor = GREY;
+
+    userAnswer = C;
+    nextQuestion();
+    clearButtonStates();
 })
 
 dButton.addEventListener('click', function() {
     clearButtonStates()
 
     dClicked = true;
-    dButton.style.backgroundColor = "grey"
+    dButton.style.backgroundColor = GREY;
 
+    userAnswer = D;
     nextQuestion();
+    clearButtonStates();
 })
-
 
 function clearButtonStates() {
     aButton.style.backgroundColor = ORANGE_RED;

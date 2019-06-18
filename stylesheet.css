@@ -71,6 +71,14 @@
                 cursor: pointer;
             }
             
+            .result {
+                background: white;
+                margin: auto;
+                text-align: center;
+                font-size: 128px;
+                color: orangered;
+            }
+            
             a:active {
                 color: white;
                 text-decoration: none;

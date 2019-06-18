@@ -23,19 +23,52 @@ function readInQuestions() {
 }
 
 function nextQuestion() {
-
-    ++currentQuestionIndex;
-    console.log("Next Question: " + currentQuestionIndex);
-    updateUI();
+    checkAnswer();
+    if (checkEndOfQuiz()) {
+        ++currentQuestionIndex;
+        console.log("Next Question: " + currentQuestionIndex);
+        updateUI();
+    } else {
+        console.log("end of quiz");
+        endQuiz();
+    }
 }
 
 function startQuiz() {
-    nextQuestion();
+    ++currentQuestionIndex;
+    updateUI();
 }
 
 function updateUI() {
-    questionDisplay.innerHTML = questionList[currentQuestionIndex].getQuestion();
+    if (questionList[currentQuestionIndex] != null) {
+        questionDisplay.innerHTML = questionList[currentQuestionIndex].getQuestion();
+    }
 }
 
+function checkEndOfQuiz() {
+    return (currentQuestionIndex < questionList.length - 1)
+}
+
+function endQuiz() {
+    // document.location.href = "result.html";
+
+    var myNode = document.getElementById("content");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+
+    document.getElementById("title").innerHTML = "<h3>RESULTS</h3>"
+    document.getElementById("content").innerHTML = '<div class = "result">Your score was ' + score + ' </div>' +
+        '<button ><a href = "index.html">Main Menu</a></button>';
+}
+
+function checkAnswer() {
+    var currentQuestion = questionList[currentQuestionIndex];
+
+    if (currentQuestion.answer == currentQuestion.answersLists[userAnswer]) {
+        console.log("Correct!");
+        ++score;
+    }
+}
 readInQuestions();
 startQuiz();
